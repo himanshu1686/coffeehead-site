@@ -1,0 +1,12 @@
+.userSidebar p{
+  margin:0;
+  /* background-color: #fcfcfc; */
+  transition:all ease .3s;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.userSidebar p:hover{
+  background-color:#d7faff;
+  padding-left: 10px;
+}

@@ -1,0 +1,10 @@
+  .test:hover{
+      background-color: #fafafa;
+      animation: wiggle 0.2s ease infinite;
+  }
+@keyframes wiggle
+{
+    0% {transform: rotateZ(2deg);}
+    50% {transform: rotateZ(-2deg);}
+    100% {transform: rotateZ(2deg);}
+}

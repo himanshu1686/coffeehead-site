@@ -1,0 +1,26 @@
+<% include ../partials/header1 %>
+
+<div class="row">
+  <div class="col-2">
+    <ul class="sidebar">
+    <li> Home</li>
+    <li><a href="/coffeehead/beans">Beans </a></li>
+    <li><a href="/coffeehead/coffee"> coffee</a></li>
+    </ul>
+    </div>
+  <div class="col-10 m-2">
+    <h1>
+        Some error has occured ..
+    </h1>
+  <%  if(errorMessage){ %>
+      <div class="">
+        <p>
+          <%=errorMessage %>
+          error message goes here.
+        </p>
+      </div>
+  <% } %>
+ </div>
+</div>
+
+<% include ../partials/footer1 %>

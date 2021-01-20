@@ -1,0 +1,14 @@
+<% include ../partials/header1 %>
+<div class="text-center mt-2">
+<form method="post" action="/coffeehead/login">
+<input type="email" name="email" required="true" placeholder="Enter Email">
+<input type="password" name="password" required="true" placeholder="password">
+<button>Login</button>
+
+  </form>
+  <p class="text-center"> <a href="/coffeehead/login/forgotpassword">Forgot Password ?</a></p>
+<p class="text-center"  >OR </p>
+  <br>
+  <a href="/coffeehead/googlelogin">Login with google account</a>
+</div>
+<% include ../partials/footer1 %>

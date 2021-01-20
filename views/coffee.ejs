@@ -1,0 +1,36 @@
+<% include ./partials/header1 %>
+<script type="text/javascript" src="/javascript/coffee.js"></script>
+
+
+<div class="row">
+  <div class="col-2">
+    <ul class="sidebar">
+      <li><a href="/coffeehead/coffee/addnew"> Add new </a></li>
+      <li> <a href="#" >Home</a></li>
+    <li><a href="/coffeehead/beans">Beans </a></li>
+    <li><a href="/coffeehead/coffee"> Coffee</a></li>
+    </ul>
+  </div>
+  <div class="col-10">
+    <div class="row">
+         <% for(i=0;i<allcoffees.length ;i++){ %>
+           <div class="col-4 p-2">
+              <a href="/coffeehead/coffee/<%=allcoffees[i]._id %>">
+              <div class="card" >
+                <img src="<%=allcoffees[i].images[0]%>" class="card-img-top" >
+                <div class="card-body">
+                  <p class="card-text"><%= allcoffees[i].coffeeName%></p>
+                  <button  <% if(liked[i]==="true"){ %>data-isliked="true" class="likeButton buttonliked"<%}  else{ %> data-isliked="false" class="likeButton"<% } %>  data-coffeeid="<%=allcoffees[i]._id%>" > <i class="fas fa-heart"></i> <span id="likes<%=allcoffees[i]._id%>"><%=allcoffees[i].likes%></span></button>
+
+                </div>
+              </div>
+              </a>
+            </div>
+            <% } %>
+          </div>
+
+</div>
+</div>
+
+
+<% include ./partials/footer1 %>

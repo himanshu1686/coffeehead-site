@@ -1,0 +1,155 @@
+<% include ../partials/header1 %>
+<script type="text/javascript" src="/javascript/showDrink.js"></script>
+<div class="row">
+  <div class="col-2 ">
+    <ul class="sidebar">
+      <li> <a href="#" >Home</a></li>
+    <li><a href="/coffeehead/beans">Beans </a></li>
+    <li><a href="/coffeehead/coffee"> Coffee</a></li>
+    </ul>
+  </div>
+  <div class="col-10">
+    <h4 class="text-center mainheading" ><%=coffee.coffeeName %></h4>
+    <hr>
+    <button  data-coffeeid="<%=coffee._id%>" <% if(liked==="true"){ %>data-isliked="true" class="likeButton buttonliked" <%}  else{ %> data-isliked="false" class="likeButton" <% } %>><i class="fas fa-heart"></i>
+          <span id="likes<%=coffee._id%>"><%=coffee.likes%></span></button>
+     <% for(var i=0;i<coffee.paras.length || i<coffee.images.length;i++){ %>
+       <div class="row">
+        <div class="col-8 <% if(i%2==0){ %> <%} else {  %> order-last  <% }  %>">
+              <% if(i!==0){ %>
+                  <h5> <%= coffee.paras[i].title %> </h5>
+                  <% } %>
+                <p>
+                  <%= coffee.paras[i].text %>
+                  </p>
+
+        </div>
+        <div class="col-4">
+          <img src="<%=coffee.images[i]%>" class="w-100">
+          </div>
+          </div>
+      <%}%>
+
+      <div class="accordion" id="accordionExample">
+ <% if(coffee.steps){ %>
+
+     <h5>Steps</h5>
+     <hr>
+     <ol>
+     <% for(var i=0;i<coffee.steps.length;){ %>
+     <li>
+         <div class="" id="heading<%=i%>">
+           <h2 class="mb-0">
+             <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse<%=i%>" aria-expanded="true" aria-controls="collapseheading<%=i%>">
+                <%= coffee.steps[i] %>
+                <% i++ %>
+             </button>
+           </h2>
+         </div>
+         <div id="collapse<%=i-1%>" class="collapse " aria-labelledby="heading<%=i-1%>" data-parent="#accordionExample">
+           <div class="">
+             <%= coffee.steps[i] %>
+             <% i++ %>
+           </div>
+         </div>
+
+     </li>
+     <% } %>
+     </ol>
+     <% } %>
+   </div>
+   <div class="text-center">
+<form  action="/coffeehead/coffee/<%=coffee._id%>?_method=DELETE" method="POST">
+<button type="submit" class="btn btn-outline-danger">Delete this post</button>
+  </form>
+  </div>
+</div>
+<div style="position:relative;background-color: #fcfcfc;">
+  <% if(coffee.thisObjComments && coffee.thisObjComments.length>0){  %>
+  <h5 >Comments:</h5>
+<% } else { %>
+    <h5> NoComment to display </h5>
+  <% } %>
+    <% if(coffee.thisObjComments && coffee.thisObjComments.length>0) { %>
+    <div>
+      <% for(i=0;i<coffee.thisObjComments.length;i++){ %>
+
+        <div class="row position-relative" style="position: relative;" >
+          <div class="col-1">
+            <img src="<%=coffee.thisObjComments[i].author.dp %>" class="w-100">
+            </div>
+        <div class="col-11 mb-2">
+          <h5>
+          <%=coffee.thisObjComments[i].author.name %>
+          </h5>
+          <h6>
+            <%=coffee.thisObjComments[i].commentText %>
+
+          </h6>
+        </div >
+        <% if(coffee.thisObjComments[i].replies && coffee.thisObjComments[i].replies.length>0){ %>
+        <% for(var j=0;j<coffee.thisObjComments[i].replies.length;j++){ %>
+          <div class="ml-4 row position-relative  py-1">
+            <div class="col-1">
+              <img src="<%=coffee.thisObjComments[i].replies[j].author.dp%>" class="w-100">
+            </div>
+            <div class="col-11">
+          <h5>
+          <%=coffee.thisObjComments[i].replies[j].author.name %>
+          </h5>
+          <h6>
+            <%=coffee.thisObjComments[i].replies[j].commentText %>
+
+          </h6>
+          </div>
+          <br>
+          <div   class="topRight text-right">
+          <form method="post" action="/coffeehead/coffee/<%=coffee._id%>/<%=coffee.thisObjComments[i]._id%>/<%=coffee.thisObjComments[i].replies[j]._id%>?_method=DELETE" >
+            <button class="btn btn-sm btn-outline-danger" type="submit">Delete this reply </button></form>
+          </div>
+          </div>
+          <% } %>
+
+
+          <% } %>
+
+          <div class="text-right topRight ">
+          <form method="post" action="/coffeehead/coffee/<%=coffee._id%>/<%=coffee.thisObjComments[i]._id%>?_method=DELETE" class="d-inline-block"><button class="btn btn-outline-danger" type="submit"  >Delete Comment</button></form>
+          <button  class="btn1 btn btn-outline-primary" >Add Reply</button>
+          <div class="replyform text-right" style="display:none"  >
+          <form class="form ml-4" action="/coffeehead/coffee/<%=coffee._id%>/<%=coffee.thisObjComments[i]._id%>/reply" method="post">
+          <!-- <label for="usename"> username:</label> -->
+            <!-- <input type="text" name="username" > -->
+            <input type="text" name="text" class="w-100 form-control" >
+
+            <button type="submit" class="btn btn-outline-primary d-inline block">Add Reply</button >
+          </form>
+          </div>
+          </div>
+
+        </div>
+
+
+      <% } %>
+      </div>
+      <% } %>
+      <!--form to comment -->
+
+      <button id="showhideCommentForm" class="btn btn-outline-primary my-2">Add comment</button>
+      <form class="form" id="commentForm" style="display:none" action="/coffeehead/coffee/<%=coffee._id%>/addcomment" method="post">
+
+      <!-- <label for="usename" > username:</label> -->
+        <!-- <input type="text" name="username" > -->
+        <!-- <label for="text" >text:</label> -->
+        <input class="form-control" type="text" name="text" >
+        <button type="submit" class="btn btn-outline-primary my-2">Add Comment</button>
+
+      </form>
+  </div>
+</div>
+<div class="text-right">
+<label>Add To Your Bookmarks(login required) :</label>
+<input type="checkbox" id="bookmark"<%if(checkbox){%> checked <% }else { %> unchecked <%}%> >
+</div>
+
+<% include ../partials/footer1 %>

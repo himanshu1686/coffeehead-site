@@ -1,0 +1,29 @@
+<% include ../partials/header1 %>
+<div class="text-center my-5">
+<form method="post"  class="my-5form" action="/coffeehead/registeruser" enctype="multipart/form-data">
+  <!-- <label> Email:-</label> -->
+  <input class="my-3 form-control" type="email" name="email" required="true" placeholder="email">
+  <!-- <label> User name :-</label> -->
+<input  class="my-3 form-control" type="text" name="username" required="true" placeholder="username">
+<!-- <label> password :-</label> -->
+
+<input  class="my-3 form-control" type="password" name="password" required="true" placeholder="password">
+<!-- <label> Date of birth :-</label> -->
+
+<input  class="my-3 w-25 form-control" type="date" name="date" >
+<div class="my-5">
+<!-- <label>Profile Pic Url:-</label> -->
+  <input  class="my-3 form-control" type="text" name="profilePicURL" placeholder="profile pic url">
+  <label>..OR..</label>
+  <input  class="my-3 form-control" type="file" name="image" id="image" accept="image/*" >
+</div>
+<select name="gender"  class="form-control">
+      <option value="Male">Male</option>
+      <option value="Female">Female</option>
+      <option value="Others">Others</option>
+</select>
+<button class="btn btn-sm btn-info my-3">submit</button>
+  </form>
+  <a href="/coffeehead/googlelogin" class="button ">google Login</a>
+  </div>
+  <% include ../partials/footer1 %>

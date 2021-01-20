@@ -1,0 +1,36 @@
+<% include ../partials/header1 %>
+<link rel="stylesheet" href="/css/dashboard.css">
+
+<div class="row">
+  <div class="col-3">
+    <div class="">
+      <img src="<%=user.dp%>" alt="" class="w-100 m-2">
+    </div>
+    <div class="userSidebar">
+
+        <p >
+        <a href="/coffeehead/user/edit">  Edit </a>
+        </p>
+        <p >
+          <a href="/coffeehead/user/changepassword">Change Password</a>
+        </p>
+
+
+    </div>
+  </div>
+  <div class="col-9">
+    <div class="m-3">
+      <p>
+          Name:<%=user.username%>
+      </p>
+        <p>
+            E-mail:<%=user.email%>
+        </p>
+        <p>
+            Date of Birth:<%=user.dob%>
+        </p>
+    </div>
+  </div>
+</div>
+
+<% include ../partials/footer1 %>

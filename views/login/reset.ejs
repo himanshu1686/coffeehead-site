@@ -1,0 +1,13 @@
+<% include ../partials/header1 %>
+<form method="post" action="/coffeehead/resetpassword/<%=token%>">
+<div class="form-group">
+<label for="newPass" >Enter New Password</label>
+<input type="password" class="form-control" id="newPass" name="newPassword" aria-describedby="emailHelp" >
+</div>
+<div class="form-group">
+<label for="confirm" >Confirm New Password</label>
+<input type="password" class="form-control" id="confirm" name="confirm" aria-describedby="emailHelp" >
+</div>
+<button type="submit" class="btn btn-primary">Submit</button>
+</form>
+<% include ../partials/footer1 %>

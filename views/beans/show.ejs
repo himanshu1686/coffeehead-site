@@ -1,0 +1,128 @@
+<% include ../partials/header1 %>
+<script type="text/javascript" src="/javascript/showBean.js"></script>
+
+
+  <!-- side bar -->
+<div class="row">
+  <div class="col-2">
+    <ul class="sidebar">
+    <li> <a href="#" >Home</a></li>
+    <li><a href="/coffeehead/beans">Beans </a></li>
+    <li><a href="/coffeehead/coffee"> Coffee</a></li>
+    </ul>
+  </div>
+
+  <div class="col-10">
+    <h4 class="text-center"><%=bean.beanName %></h4>
+    <hr>
+     <h6>origin:<%=bean.origin %></h6>
+     <button  <% if(liked==="true"){ %>data-isliked="true" class="likeButton buttonliked"<%}  else{ %> data-isliked="false" class="likeButton"<% } %> data-beanid="<%=bean._id%>" ><i class="fas fa-heart"></i>
+     <span id="likes<%=bean._id%>"><%=bean.likes%></span>
+    </button>
+     <% for(var i=0;i<bean.paras.length || i<bean.images.length;i++){ %>
+<% if(bean.images[i]){%>
+  <div class="text-center"><img src="<%=bean.images[i] %>" class="mr-auto ml-auto w-50"></div>
+  <% }%>
+      <%if(bean.paras[i]){ %>
+      <p>
+             <%=bean.paras[i] %>
+      </p>
+      <% } %>
+      <% } %>
+
+ </div>
+<div class="text-center w-100">
+  <form  action="/coffeehead/beans/<%=bean._id%>?_method=DELETE" method="POST">
+  <button type="submit" class="btn btn-outline-danger">Delete this post</button>
+    </form>
+</div>
+
+
+</div>
+<!-- comment section -->
+<div style="position:relative;background-color: #fcfcfc;">
+  <% if(bean.thisObjComments && bean.thisObjComments.length>0){  %>
+    <h5>Comments:</h5>
+  <% } else { %>
+    <h5> NoComment to display </h5>
+  <% } %>
+  <% if(bean.thisObjComments && bean.thisObjComments.length>0) { %>
+    <div>
+      <% for(i=0;i<bean.thisObjComments.length;i++){ %>
+        <div class="row position-relative">
+          <div class="col-1">
+            <img src="<%=bean.thisObjComments[i].author.dp %>" class="w-100">
+            </div>
+        <div class="col-11 mb-2">
+          <h5>
+          <%=bean.thisObjComments[i].author.name %>
+          </h5>
+          <h6>
+            <%=bean.thisObjComments[i].commentText %>
+
+          </h6>
+
+        </div >
+        <% if(bean.thisObjComments[i].replies && bean.thisObjComments[i].replies.length>0){ %>
+        <% for(var j=0;j<bean.thisObjComments[i].replies.length;j++){ %>
+          <div class="ml-4 row position-relative">
+            <div class="col-1">
+              <img src="<%=bean.thisObjComments[i].replies[j].author.dp%>" class="w-100" alt="">
+            </div>
+            <div class="col-11">
+          <h5>
+          <%=bean.thisObjComments[i].replies[j].author.name %>
+          </h5>
+          <h6>
+            <%=bean.thisObjComments[i].replies[j].commentText %>
+
+          </h6>
+          </div>
+          <br>
+          <div class=" topRight text-right">
+
+          <form method="post" action="/coffeehead/beans/<%=bean._id%>/<%=bean.thisObjComments[i]._id%>/<%=bean.thisObjComments[i].replies[j]._id%>?_method=DELETE" ><button class="btn btn-outline-danger" type="submit" >Delete this reply </button></form>
+        </div>
+
+          </div>
+          <% } %>
+
+          <% } %>
+
+          <div class="text-right topRight">
+            <form method="post"class="d-inline-block" action="/coffeehead/beans/<%=bean._id%>/<%=bean.thisObjComments[i]._id%>?_method=DELETE" ><button class="btn btn-outline-danger" type="submit" >Delete this comment </button></form>
+            <button class="btn1 btn btn-outline-primary" class="d-inline-block">Add Reply</button>
+          <div class="replyform" style="display:none" >
+            <form class="form ml-4" action="/coffeehead/beans/<%=bean._id%>/<%=bean.thisObjComments[i]._id%>/reply" method="post">
+
+              <input type="text" name="text" class="form-control" >
+
+              <button type="submit" class="btn btn-outline-primary "> Add </button>
+            </form>
+
+          </div>
+        </div>
+
+        </div>
+
+        <% } %>
+        </div>
+        <% } %>
+        </div>
+
+
+<button id="showhideCommentForm" class="btn btn-outline-primary my-2" >Add Comment</button>
+<form class="form" id="commentForm" style="display:none;" action="/coffeehead/beans/<%=bean._id%>/addcomment" method="post">
+<!-- <label for="usename" > username:</label> -->
+  <!-- <input type="text" name="username" > -->
+  <!-- <label for="text" >text:</label> -->
+  <input type="text" name="text" >
+  <button type="submit" class="btn btn-outline-primary" >Add</button>
+
+</form>
+<br>
+<div class="text-right">
+<label>Add To Your Bookmarks(login required) :</label>
+<input type="checkbox" id="bookmark" <%if(checkbox){%> checked <% }else { %> unchecked <%}%> >
+</div>
+<% include ../partials/footer1 %>

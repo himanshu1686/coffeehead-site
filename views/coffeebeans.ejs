@@ -1,0 +1,38 @@
+<% include ./partials/header1 %>
+<script type="text/javascript" src="/javascript/coffeebeans.js"></script>
+
+<div class="row">
+  <div class="col-2">
+    <ul class="sidebar">
+      <li><a href="/coffeehead/beans/addnew"> Add new </a></li>
+      <li> <a href="#" >Home</a></li>
+    <li><a href="/coffeehead/beans">Beans </a></li>
+    <li><a href="/coffeehead/coffee"> Coffee</a></li>
+    </ul>
+    </div>
+  <div class="col-10">
+    <% if(allBeans && allBeans.length>0){ %>
+  <%  for(var i=0;i<allBeans.length; i++){ %>
+    <div class="row pt-2 pb-2">
+        <div class="col-8">
+            <div>
+                <p><%= allBeans[i].beanName %></p>
+                <span> Origin: <%= allBeans[i].origin %> </span>
+                <hr>
+                <p><%=allBeans[i].paras[0] %></p>
+            </div>
+            <button  <% if(liked[i]==="true"){ %>data-isliked="true" class="likeButton buttonliked"<%}  else{ %> data-isliked="false" class="likeButton"<% } %> data-beanid="<%=allBeans[i]._id%>" ><i class="fas fa-heart"></i>
+<span id="likes<%=allBeans[i]._id%>"><%=allBeans[i].likes%></span>
+            </button>  <span><a href="/coffeehead/beans/<%=allBeans[i]._id%>" class="btn btn-info"> Read More </a> </span>
+        </div>
+        <div class="col-4">
+
+          <img src="<%=allBeans[i].images[0]%>" class="w-100 ">
+        </div>
+    </div>
+    <%  } %>
+    <% } %>
+    <div id="exptDiv"></div>
+ </div>
+</div>
+<% include ./partials/footer1 %>

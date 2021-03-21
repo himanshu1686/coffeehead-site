@@ -46,7 +46,7 @@ passport.use(new LocalStrategy({
 passport.use(
     new GoogleStrategy({
         clientID:process.env.GOOGLE_CLIENT_ID,
-        clientSecret:process.env.CLIENT_SECRET,
+        clientSecret:process.env.GOOGLE_CLIENT_SECRET,
         callbackURL: "https://coffeehead-web-app.herokuapp.com/coffeehead/google/redirect/"
     }, (accessToken, refreshToken, profile, done) => {
         // check if user already exists in our own db

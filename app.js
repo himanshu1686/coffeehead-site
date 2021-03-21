@@ -43,40 +43,41 @@ passport.use(new LocalStrategy({
   usernameQueryFields: ['email']
 },user.authenticate()));
 
-passport.use(
-    new GoogleStrategy({
-        clientID:process.env.GOOGLE_CLIENT_ID,
-        clientSecret:process.env.GOOGLE_CLIENT_SECRET,
-        callbackURL: "https://coffeehead-web-app.herokuapp.com/coffeehead/google/redirect/"
-    }, (accessToken, refreshToken, profile, done) => {
-        // check if user already exists in our own db
-        console.log("call back runs nw what?");
-        console.log('profile ', profile );
+// passport.use(
+//     new GoogleStrategy({
+//         clientID:process.env.GOOGLE_CLIENT_ID,
+//         clientSecret:process.env.GOOGLE_CLIENT_SECRET,
+//         callbackURL: "https://coffeehead-web-app.herokuapp.com/coffeehead/google/redirect/"
+//     }, (accessToken, refreshToken, profile, done) => {
+//         // check if user already exists in our own db
+//         console.log("call back runs nw what?");
+//         console.log('profile ', profile );
 
-        user.findOne({googleId: profile.id})
-        .then((currentUser) => {
-              if(currentUser){
-                console.log('user is: ', currentUser);
-                done(null,currentUser);
-                } else {
-                user.create({
-                    googleId: profile.id,
-                    username: profile.displayName,
-                    email:profile.emails[0].value
-                }).
-                then((newUser) => {
-                    console.log('created new user: ', newUser);
-                    done(null,newUser);
-                  }).catch((err)=>{
-                  console.log(err);
-                });
-            }
+//         user.findOne({googleId: profile.id})
+//         .then((currentUser) => {
+//               if(currentUser){
+//                 console.log('user is: ', currentUser);
+//                 done(null,currentUser);
+//                 } else {
+//                 user.create({
+//                     googleId: profile.id,
+//                     username: profile.displayName,
+//                     email:profile.emails[0].value
+//                 }).
+//                 then((newUser) => {
+//                     console.log('created new user: ', newUser);
+//                     done(null,newUser);
+//                   }).catch((err)=>{
+//                   console.log(err);
+//                 });
+//             }
 
-        }).catch((err)=>{
-        console.log(err);
-      });
-    })
-);
+//         }).catch((err)=>{
+//         console.log(err);
+//       });
+//     })
+// );
+
 passport.serializeUser(user.serializeUser());
 passport.deserializeUser(user.deserializeUser());
 

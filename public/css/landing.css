@@ -1,5 +1,5 @@
 .test:hover {
-  background-color: #fafafa;
+  background-color: #fafafa57;
   animation: wiggle 0.2s ease infinite;
 }
 .landing {

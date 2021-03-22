@@ -4,16 +4,26 @@ var app=express();
 var mongoose=require("mongoose");
 var user=require("./model/user");
 var methodOverride=require("method-override");
-var bodyParser=require("body-parser");
+// var bodyParser=require("body-parser");
 var flash=require("connect-flash");
-app.use(bodyParser.urlencoded({extended:true}));
+app.use(express.urlencoded({extended:false}));
+app.use(express.json())
 var passport=require("passport");
 var cookieParser = require('cookie-parser');
 var LocalStrategy=require("passport-local")
 var GoogleStrategy=require("passport-google-oauth20");
 var session = require('express-session');
 var mongoURI=process.env.MONGO_ATLAS_URI;
-mongoose.connect(mongoURI,{useNewUrlParser:true});
+console.log(mongoURI)
+mongoose.connect(mongoURI
+  ,{useNewUrlParser: true,
+    dbName:'test',
+  useCreateIndex: true,
+  useFindAndModify: false,
+  useUnifiedTopology: true,}).then( obj =>{ console.log(obj) 
+  console.log(" _______________________________ ");
+    console.log(obj.connections[0].db.databaseName) }
+    ).catch(err=>{console.log("mongo err") ; console.log(err); });
 app.use(methodOverride("_method"));
 var coffeeRoutes    = require("./routes/coffee");
 var beansRoutes = require("./routes/beans");

@@ -15,6 +15,7 @@ console.log(req.protocol + "://" + req.get('host') + req.originalUrl);
   then(obj=>{
     var liked=[];
     var x;
+    console.log(obj)
     if(req.user){
       obj.forEach(function(cofeeObj){
         x=cofeeObj.likeList.some(function(elem){
@@ -29,7 +30,7 @@ console.log(req.protocol + "://" + req.get('host') + req.originalUrl);
       });
 
       }
-
+      console.log( obj , liked  );
     res.render("coffee",{allcoffees:obj,liked:liked });
   })
   .catch(err=>{

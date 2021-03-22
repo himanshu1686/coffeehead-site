@@ -18,4 +18,4 @@ var coffeeSchema=new mongoose.Schema({
     }
   ]
 });
-module.exports=mongoose.model("drinks",coffeeSchema);
+module.exports=mongoose.model("drink",coffeeSchema);

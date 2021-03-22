@@ -19,4 +19,4 @@ var beansSchema=new mongoose.Schema({
     }
   ]
 });
-module.exports=mongoose.model("cbeans",beansSchema);
+module.exports=mongoose.model("cbean",beansSchema);

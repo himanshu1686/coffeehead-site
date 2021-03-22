@@ -20,9 +20,11 @@ mongoose.connect(mongoURI
     dbName:'test',
   useCreateIndex: true,
   useFindAndModify: false,
-  useUnifiedTopology: true,}).then( obj =>{ console.log(obj) 
-  console.log(" _______________________________ ");
-    console.log(obj.connections[0].db.databaseName) }
+  useUnifiedTopology: true,}).
+  then( 
+    // obj =>{ console.log(obj) 
+  // console.log(" _______________________________ ");
+    // console.log(obj.connections[0].db.databaseName) }
     ).catch(err=>{console.log("mongo err") ; console.log(err); });
 app.use(methodOverride("_method"));
 var coffeeRoutes    = require("./routes/coffee");
@@ -87,7 +89,7 @@ passport.use(new LocalStrategy({
 //       });
 //     })
 // );
-
+//to make commit
 passport.serializeUser(user.serializeUser());
 passport.deserializeUser(user.deserializeUser());
 

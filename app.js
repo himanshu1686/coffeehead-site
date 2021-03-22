@@ -60,7 +60,7 @@ passport.use(
         clientID:process.env.GOOGLE_CLIENT_ID,
         clientSecret:process.env.GOOGLE_CLIENT_SECRET,
 //      callbackURL: "http://localhost:8080/coffeehead/google/redirect/"
-         callbackURL: "https://coffeehead-web-app.herokuapp.com/coffeehead/google/redirect/"
+         callbackURL: "https://coffeehead.herokuapp.com/coffeehead/google/redirect/"
     }, (accessToken, refreshToken, profile, done) => {
         // check if user already exists in our own db
         console.log("call back runs nw what?");
